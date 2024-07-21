@@ -5,7 +5,7 @@ class HashMap {
   constructor() {
     this.list = [];
     this.capacity = 16;
-    this.loadFactor = 0.8;
+    this.loadFactor = 0.75;
   }
   hash(key) {
     let hashCode = 0;
@@ -27,3 +27,5 @@ class HashMap {
   values() {}
   entries() {}
 }
+
+export default HashMap;
