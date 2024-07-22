@@ -53,7 +53,20 @@ class HashMap {
 
     return value;
   }
-  has(key) {}
+  has(key) {
+    const bucketIndex = this.hash(key) % this.capacity;
+
+    if (bucketIndex < 0 || bucketIndex >= this.capacity) {
+      throw new Error("Trying to access index out of bound");
+    }
+
+    const listPos = this.buckets[bucketIndex].findKey(key);
+
+    if (listPos === null) {
+      return false;
+    }
+    return true;
+  }
   remove(key) {}
   length() {}
   clear() {}
