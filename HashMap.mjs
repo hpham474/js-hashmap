@@ -1,11 +1,11 @@
 import LinkedList from "./LinkedList.mjs";
 
 class HashMap {
-  list;
+  buckets;
   capacity;
   loadFactor;
   constructor() {
-    this.list = [];
+    this.buckets = [];
     this.capacity = 16;
     this.loadFactor = 0.75;
   }
@@ -19,7 +19,21 @@ class HashMap {
 
     return hashCode;
   }
-  set(key, value) {}
+  set(key, value) {
+    const bucketIndex = this.hash(key) % this.capacity;
+
+    if (bucketIndex < 0 || bucketIndex >= this.capacity) {
+      throw new Error("Trying to access index out of bound");
+    }
+
+    if (this.buckets[bucketIndex] === undefined) {
+      const list = new LinkedList();
+      list.append(key, value);
+      this.buckets[bucketIndex] = list;
+    } else {
+      this.buckets[bucketIndex].append(key, value);
+    }
+  }
   get(key) {}
   has(key) {}
   remove(key) {}
@@ -27,7 +41,16 @@ class HashMap {
   clear() {}
   keys() {}
   values() {}
-  entries() {}
+  entries() {
+    const list = [];
+    for (let i = 0; i < this.capacity; i++) {
+      if (this.buckets[i] !== undefined) {
+        list.push(this.buckets[i].toArray());
+      }
+    }
+
+    return list;
+  }
 }
 
 export default HashMap;

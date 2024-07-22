@@ -107,6 +107,18 @@ class LinkedList {
       current = current.nextNode;
     }
   }
+  toArray() {
+    const array = [];
+    let current = this.list;
+    while (current !== null) {
+      const pair = [current.key, current.value];
+
+      array.push(pair);
+      current = current.nextNode;
+    }
+
+    return array;
+  }
   toString() {
     let current = this.list;
     let string = "";
