@@ -23,8 +23,22 @@ class HashMap {
 
     return hashCode;
   }
+  rehash() {
+    console.log("rehash");
+    this.capacity = this.capacity * 2;
+    for (let i = this.capacity / 2; i < this.capacity; i++) {
+      const list = new LinkedList();
+      this.buckets[i] = list;
+    }
+
+    const entries = this.entries();
+    this.clear();
+    for (const entry of entries) {
+      this.set(entry[0], entry[1]);
+    }
+  }
   set(key, value) {
-    const bucketIndex = this.hash(key) % this.capacity;
+    let bucketIndex = this.hash(key) % this.capacity;
 
     if (bucketIndex < 0 || bucketIndex >= this.capacity) {
       throw new Error("Trying to access index out of bound");
@@ -36,6 +50,11 @@ class HashMap {
       const listPos = this.buckets[bucketIndex].findKey(key);
       this.buckets[bucketIndex].at(listPos).value = value;
     } else {
+      if (this.length() / this.capacity >= this.loadFactor) {
+        this.rehash();
+        bucketIndex = this.hash(key) % this.capacity;
+      }
+
       this.buckets[bucketIndex].append(key, value);
     }
   }
