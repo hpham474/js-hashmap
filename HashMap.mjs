@@ -84,7 +84,12 @@ class HashMap {
   length() {
     return this.entries().length;
   }
-  clear() {}
+  clear() {
+    for (let i = 0; i < this.capacity; i++) {
+      const list = new LinkedList();
+      this.buckets[i] = list;
+    }
+  }
   keys() {}
   values() {}
   entries() {
