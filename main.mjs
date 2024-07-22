@@ -14,8 +14,8 @@ test.set("ice cream", "white");
 test.set("jacket", "blue");
 test.set("kite", "pink");
 test.set("lion", "golden");
+test.set("lion", "mane");
 
 //test.set("moon", "silver");
 
 console.log(test.entries());
-console.log(test.values());

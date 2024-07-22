@@ -32,7 +32,12 @@ class HashMap {
 
     // TODO: RESIZE HASHMAP IF NECESSARY
 
-    this.buckets[bucketIndex].append(key, value);
+    if (this.has(key) === true) {
+      const listPos = this.buckets[bucketIndex].findKey(key);
+      this.buckets[bucketIndex].at(listPos).value = value;
+    } else {
+      this.buckets[bucketIndex].append(key, value);
+    }
   }
   get(key) {
     const bucketIndex = this.hash(key) % this.capacity;
