@@ -44,6 +44,11 @@ class HashMap {
     }
 
     const listPos = this.buckets[bucketIndex].findKey(key);
+
+    if (listPos === null) {
+      return null;
+    }
+
     const value = this.buckets[bucketIndex].at(listPos).value;
 
     return value;
