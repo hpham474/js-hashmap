@@ -24,7 +24,6 @@ class HashMap {
     return hashCode;
   }
   rehash() {
-    console.log("rehash");
     this.capacity = this.capacity * 2;
     for (let i = this.capacity / 2; i < this.capacity; i++) {
       const list = new LinkedList();
@@ -43,8 +42,6 @@ class HashMap {
     if (bucketIndex < 0 || bucketIndex >= this.capacity) {
       throw new Error("Trying to access index out of bound");
     }
-
-    // TODO: RESIZE HASHMAP IF NECESSARY
 
     if (this.has(key) === true) {
       const listPos = this.buckets[bucketIndex].findKey(key);
@@ -143,6 +140,11 @@ class HashMap {
     }
 
     return list;
+  }
+  print() {
+    for (let i = 0; i < this.capacity; i++) {
+      console.log(`${i}: ${this.buckets[i].toString()}`);
+    }
   }
 }
 

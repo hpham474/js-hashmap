@@ -15,6 +15,8 @@ test.set("jacket", "blue");
 test.set("kite", "pink");
 test.set("lion", "golden");
 
-//test.set("moon", "silver");
+test.print();
 
-console.log(test.entries());
+test.set("moon", "silver");
+
+test.print();
