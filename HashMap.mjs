@@ -8,7 +8,7 @@ class HashMap {
     this.buckets = [];
     this.capacity = 16;
     this.loadFactor = 0.75;
-    for(let i = 0; i < this.capacity; i++) {
+    for (let i = 0; i < this.capacity; i++) {
       const list = new LinkedList();
       this.buckets[i] = list;
     }
@@ -81,15 +81,17 @@ class HashMap {
 
     return true;
   }
-  length() {}
+  length() {
+    return this.entries().length;
+  }
   clear() {}
   keys() {}
   values() {}
   entries() {
-    const list = [];
+    let list = [];
     for (let i = 0; i < this.capacity; i++) {
       if (this.buckets[i].toArray().length !== 0) {
-        list.push(this.buckets[i].toArray());
+        list = list.concat(this.buckets[i].toArray());
       }
     }
 
