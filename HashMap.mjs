@@ -26,6 +26,8 @@ class HashMap {
       throw new Error("Trying to access index out of bound");
     }
 
+    // TODO: RESIZE HASHMAP IF NECESSARY
+
     if (this.buckets[bucketIndex] === undefined) {
       const list = new LinkedList();
       list.append(key, value);
@@ -34,7 +36,18 @@ class HashMap {
       this.buckets[bucketIndex].append(key, value);
     }
   }
-  get(key) {}
+  get(key) {
+    const bucketIndex = this.hash(key) % this.capacity;
+
+    if (bucketIndex < 0 || bucketIndex >= this.capacity) {
+      throw new Error("Trying to access index out of bound");
+    }
+
+    const listPos = this.buckets[bucketIndex].findKey(key);
+    const value = this.buckets[bucketIndex].at(listPos).value;
+
+    return value;
+  }
   has(key) {}
   remove(key) {}
   length() {}
