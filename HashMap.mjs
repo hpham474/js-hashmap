@@ -8,6 +8,10 @@ class HashMap {
     this.buckets = [];
     this.capacity = 16;
     this.loadFactor = 0.75;
+    for(let i = 0; i < this.capacity; i++) {
+      const list = new LinkedList();
+      this.buckets[i] = list;
+    }
   }
   hash(key) {
     let hashCode = 0;
@@ -28,13 +32,7 @@ class HashMap {
 
     // TODO: RESIZE HASHMAP IF NECESSARY
 
-    if (this.buckets[bucketIndex] === undefined) {
-      const list = new LinkedList();
-      list.append(key, value);
-      this.buckets[bucketIndex] = list;
-    } else {
-      this.buckets[bucketIndex].append(key, value);
-    }
+    this.buckets[bucketIndex].append(key, value);
   }
   get(key) {
     const bucketIndex = this.hash(key) % this.capacity;
@@ -67,7 +65,22 @@ class HashMap {
     }
     return true;
   }
-  remove(key) {}
+  remove(key) {
+    const bucketIndex = this.hash(key) % this.capacity;
+
+    if (bucketIndex < 0 || bucketIndex >= this.capacity) {
+      throw new Error("Trying to access index out of bound");
+    }
+
+    const listPos = this.buckets[bucketIndex].findKey(key);
+
+    if (listPos === null) {
+      return false;
+    }
+    this.buckets[bucketIndex].removeAt(listPos);
+
+    return true;
+  }
   length() {}
   clear() {}
   keys() {}
@@ -75,7 +88,7 @@ class HashMap {
   entries() {
     const list = [];
     for (let i = 0; i < this.capacity; i++) {
-      if (this.buckets[i] !== undefined) {
+      if (this.buckets[i].toArray().length !== 0) {
         list.push(this.buckets[i].toArray());
       }
     }

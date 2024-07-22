@@ -106,6 +106,7 @@ class LinkedList {
       pos++;
       current = current.nextNode;
     }
+    return null;
   }
   insertAt(value, index) {
     if (index === 0) {
@@ -131,6 +132,9 @@ class LinkedList {
     }
   }
   removeAt(index) {
+    if (this.size() === 0) {
+      return;
+    }
     if (index === 0) {
       this.list = this.list.nextNode;
       return;

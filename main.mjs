@@ -18,4 +18,5 @@ test.set("lion", "golden");
 //test.set("moon", "silver");
 
 console.log(test.entries());
-console.log(test.get("banana"));
+console.log(test.remove("white"));
+console.log(test.entries());
