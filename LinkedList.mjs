@@ -5,8 +5,9 @@ class LinkedList {
     constructor() {
         this.list = null;
     }
-    append(value) {
+    append(key, value) {
         const node = new Node();
+        node.key = key;
         node.value = value;
 
         if (this.list === null) {
@@ -19,8 +20,9 @@ class LinkedList {
             current.nextNode = node;
         }
     }
-    prepend(value) {
+    prepend(key, value) {
         const node = new Node();
+        node.key = key;
         node.value = value;
 
         if (this.list === null) {
