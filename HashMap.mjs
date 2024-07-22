@@ -90,8 +90,26 @@ class HashMap {
       this.buckets[i] = list;
     }
   }
-  keys() {}
-  values() {}
+  keys() {
+    let list = [];
+    for (let i = 0; i < this.capacity; i++) {
+      if (this.buckets[i].toArray().length !== 0) {
+        list = list.concat(this.buckets[i].toKeyArray());
+      }
+    }
+
+    return list;
+  }
+  values() {
+    let list = [];
+    for (let i = 0; i < this.capacity; i++) {
+      if (this.buckets[i].toArray().length !== 0) {
+        list = list.concat(this.buckets[i].toValueArray());
+      }
+    }
+
+    return list;
+  }
   entries() {
     let list = [];
     for (let i = 0; i < this.capacity; i++) {
